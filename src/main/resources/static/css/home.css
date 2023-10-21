@@ -1,0 +1,77 @@
+html, body {
+    height:100%;
+    width:100%;
+    margin:0;
+}
+
+body {
+    background-color: white;
+    display:flex;
+    background-image: url("https://img.freepik.com/premium-vector/white-pattern-with-lines-that-say-word-zigzag_686000-12.jpg");
+    background-size: 100px 100px;
+    background-repeat: repeat;
+}
+
+.login-field {
+    margin:auto;
+    height: 40%;
+}
+
+.login-form {
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+    justify-content: space-between;
+    justify-items: center;
+    padding: 20px 40px;
+    height: 100%;
+    border: 1px solid;
+    box-shadow: 5px 10px 18px #888888;
+    border-radius: 10px;
+}
+
+.header-text {
+    font-size: larger;
+    color: black;
+    text-align: center;
+}
+
+.login-img {
+    width: 175px;
+}
+
+.header {
+    height: 80px;
+    background-color: forestgreen;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.name-tag {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#name-tag {
+    text-align: center;
+    font-size: larger;
+    vertical-align: middle;
+    color: white;
+}
+
+.logout-form {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
