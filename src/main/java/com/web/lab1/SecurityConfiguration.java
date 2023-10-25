@@ -17,6 +17,7 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/").permitAll()
                 .requestMatchers("/css/*").permitAll()
+                .requestMatchers("/competition/*").permitAll()
                 .anyRequest().authenticated());
         http.logout(logout -> {
             logout.logoutSuccessUrl("/").deleteCookies("JSESSIONID").invalidateHttpSession(true);
