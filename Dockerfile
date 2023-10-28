@@ -6,6 +6,10 @@ COPY pom.xml .
 COPY src src
 RUN chmod +x mvnw
 
+COPY . /app
+ENV FIREBASE_CONFIG=/ect/firebase-key.json
+
+
 RUN ./mvnw clean package
 
 FROM openjdk:17-alpine
