@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Competitions</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="../static/css/home.css" th:href="@{/css/home.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="header"></div>
+
+<div class="mainpage-div2">
+    <img class="error-img" alt="" src="https://i.ibb.co/BcKmr0b/67df97f5342afd798cf6d4dcf2837ab545207686fb17f331701324ef087e27db-1.jpg">
+</div>
+
+<form method="get" th:action="@{/}" class="name-tag">
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full leading-6"
+            type="submit">Homepage
+    </button>
+</form>
+<form method="get" th:action="@{/logout}" th:if="${#authorization.expression('isAuthenticated()')}"
+      class="logout-form" style="margin-block-end: inherit">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full leading-6"
+            type="submit">Logout
+    </button>
+</form>
+
+<form method="get" th:action="@{/competition}" th:if="${#authorization.expression('isAuthenticated()')}"
+      class="new-comp-button" style="margin-block-end: inherit">
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full leading-6"
+            type="submit">Create
+    </button>
+</form>
+</body>
+</html>

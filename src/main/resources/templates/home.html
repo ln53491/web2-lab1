@@ -1,0 +1,67 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Competitions</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="../static/css/home.css" th:href="@{/css/home.css}" rel="stylesheet" />
+</head>
+<body>
+    <div class="header"></div>
+    <div class="login-field">
+        <form class="login-form" method="get" th:action="@{/oauth2/authorization/okta}"
+              th:unless="${#authorization.expression('isAuthenticated()')}">
+            <p class="header-text">
+                Login to proceed
+            </p>
+            <img class="login-img" src="https://pathwayport.com/saasland/images/login@4x.png" alt="">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full leading-6"
+                    type="submit">Login
+            </button>
+        </form>
+    </div>
+
+    <div class="name-tag" th:if="${#authorization.expression('isAuthenticated()')}">
+        <p id="name-tag">Hello,&nbsp;<b><span th:text="${#authentication.principal.attributes['name']}"></span></b>!</p>
+    </div>
+
+    <div class="mainpage-div" th:if="${#authorization.expression('isAuthenticated()')}">
+        <div class="title-div232" th:if="${competitionData.getAllCompetitions().size()} == 0">
+            <p class="info-text">Click on "Create" button to add your new competition.</p>
+        </div>
+        <div class="comp-form-div" th:each="comp: ${competitionData.getAllCompetitions()}">
+            <b><p class="header-text" th:text="${comp.getName()}"></p></b>
+            <div class="divcuga">
+                <form class="padd0" method="get" th:action="@{/competition/} + ${comp.getId()}">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded-full leading-6"
+                            type="submit">Open
+                    </button>
+                </form>
+                <div class="divider2"></div>
+                <form class="padd0" method="get" th:action="@{/competition/delete/} + ${comp.getId()}">
+                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded-full leading-6"
+                            type="submit">Delete
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <form method="get" th:action="@{/logout}" th:if="${#authorization.expression('isAuthenticated()')}"
+                      class="logout-form" style="margin-block-end: inherit">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full leading-6"
+                type="submit">Logout
+        </button>
+    </form>
+
+    <form method="get" th:action="@{/competition}" th:if="${#authorization.expression('isAuthenticated()')}"
+          class="new-comp-button" style="margin-block-end: inherit">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full leading-6"
+                type="submit">Create
+        </button>
+    </form>
+</body>
+</html>

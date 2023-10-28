@@ -1,0 +1,379 @@
+html, body {
+    height:100%;
+    width:100%;
+    margin:0;
+}
+
+body {
+    background-color: white;
+    display:flex;
+    background-image: url("https://img.freepik.com/premium-vector/white-pattern-with-lines-that-say-word-zigzag_686000-12.jpg");
+    background-size: 100px 100px;
+    background-repeat: repeat;
+}
+
+.login-field {
+    margin:auto;
+    height: 350px;
+}
+
+.title-div {
+    margin:auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.title-div232 {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 125px;
+}
+
+.mainpage-div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 150px;
+}
+
+.mainpage-div2 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 80px;
+}
+
+.title-div2 {
+    margin:auto;
+    display: flex;
+    flex-direction: row;
+    padding-top: 125px;
+}
+
+.login-form {
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+    justify-content: space-between;
+    justify-items: center;
+    padding: 20px 40px;
+    height: 100%;
+    border: 1px solid;
+    box-shadow: 5px 10px 18px #888888;
+    border-radius: 10px;
+}
+
+.comp-form-div {
+    display: flex;
+    background-color: white;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    padding: 20px 20px;
+    height: 100px;
+    width: 50%;
+    border: 1px solid;
+    box-shadow: 5px 10px 10px #AAAAAA;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+
+.title-form {
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+    justify-content: space-between;
+    justify-items: flex-start;
+    padding: 20px 40px;
+    height: 100%;
+    border: 1px solid;
+    box-shadow: 5px 10px 18px #888888;
+    border-radius: 10px;
+}
+
+.data-div {
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+    justify-content: space-between;
+    justify-items: flex-start;
+    padding: 20px 40px;
+    border: 1px solid;
+    box-shadow: 5px 10px 18px #888888;
+    border-radius: 10px;
+}
+
+.competition-form {
+    display: flex;
+    background-color: white;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-items: center;
+    align-items: center;
+    padding: 40px 40px;
+    height: 100%;
+    border: 1px solid;
+    box-shadow: 5px 10px 18px #888888;
+    border-radius: 10px;
+}
+
+.schedule-form {
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+    justify-content: space-between;
+    justify-items: flex-start;
+    padding: 10px 20px;
+    height: 100%;
+    border: 1px solid;
+    box-shadow: 5px 10px 18px #888888;
+    border-radius: 10px;
+}
+
+.competition-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /*justify-items: center;*/
+    align-items: flex-start;
+    height: 100%;
+}
+
+.header-text {
+    font-size: larger;
+    color: black;
+    text-align: center;
+}
+
+.info-text {
+    font-size: large;
+    color: rgb(128, 128, 128);
+    text-align: center;
+}
+
+.login-img {
+    width: 175px;
+}
+
+.error-img {
+    height: calc((100vh - 80px) * 0.8);
+}
+
+.header {
+    height: 80px;
+    background-color: forestgreen;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.name-tag {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-text {
+    border-color: white;
+    color: black;
+}
+
+.new-text {
+    padding-top: 20px;
+}
+
+#name-tag {
+    text-align: center;
+    font-size: larger;
+    vertical-align: middle;
+    color: white;
+}
+
+.logout-form {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-comp-button {
+    position: absolute;
+    top: 0;
+    right: 125px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.win-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    width: 200px;
+}
+
+.divider-text {
+    font-size: larger;
+    color: rgb(128, 128, 128);
+    text-align: center;
+    padding: 5px;
+}
+
+.divider {
+    width: 50px;
+}
+
+.divider-height {
+    height: 50px;
+}
+
+.divider2 {
+    width: 15px;
+}
+
+.divider-v {
+    height: 15px;
+}
+
+.padd0 {
+    padding: 0;
+    margin: 0;
+}
+
+.divcuga {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+}
+
+#competition-img {
+    width: 200px;
+    scale: 120%;
+}
+
+ul.compslist {
+    list-style-type: square;
+    padding: 0 25px;
+}
+
+.team-score {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+}
+
+.score-entry {
+    width: 50px;
+}
+
+.team-score-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.divider-v2 {
+    height: 5px;
+}
+
+.round-text {
+    padding-right: 30px;
+}
+
+.round-number {
+    font-size: medium;
+    color: black;
+    width: 100%;
+    padding-right: 10px;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.whole-row {
+    background-color: #E6E6E6;
+    border: 1px solid #E6E6E6;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.smalltext {
+    font-size: smaller;
+    padding: -5px 0;
+    color: dimgray;
+}
+
+.brathidden {
+    display: none;
+    opacity: 0;
+    pointer-events:none;
+}
+
+.widthfull {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    justify-items: flex-start;
+}
+
+.divider-5px {
+    height: 5px;
+}
+
+.row-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.row-row-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 10px;
+    align-items: flex-end;
+    align-content: flex-end;
+}
+
+.row22 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.divider-rr {
+    width: 25px;
+}
