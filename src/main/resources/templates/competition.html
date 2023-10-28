@@ -14,7 +14,7 @@
         <form class="competition-form" method="post" th:action="@{/competition}" th:object="${competitionForm}">
             <div class="competition-div">
                 <p class="header-text">
-                    Create new Competition
+                    Create new <b>Competition</b>
                 </p>
                 <div>
                     <label for="name"></label>
@@ -54,9 +54,11 @@
         </form>
     </div>
 
-    <div class="name-tag" th:if="${#authorization.expression('isAuthenticated()')}">
-        <p id="name-tag">Hello,&nbsp;<b><span th:text="${#authentication.principal.attributes['name']}"></span></b>!</p>
-    </div>
+    <form method="get" th:action="@{/}" class="name-tag" th:if="${#authorization.expression('isAuthenticated()')}">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full leading-6"
+                type="submit">Homepage
+        </button>
+    </form>
     <form method="get" th:action="@{/logout}" th:if="${#authorization.expression('isAuthenticated()')}"
           class="logout-form" style="margin-block-end: inherit">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>

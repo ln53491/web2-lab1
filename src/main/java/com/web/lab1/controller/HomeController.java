@@ -1,14 +1,18 @@
 package com.web.lab1.controller;
 
+import com.web.lab1.data.CompetitionCardData;
+import com.web.lab1.service.CompetitionService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Collections;
+import java.util.ArrayList;
 
 @Controller
 public class HomeController {
@@ -19,7 +23,15 @@ public class HomeController {
     private String clientId;
 
     @GetMapping("/")
-    String home() {
+    String home(Model model) {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.getPrincipal() == "anonymousUser") {
+            model.addAttribute("competitionData", new CompetitionCardData(new ArrayList<>()));
+        } else {
+            var competitionService = new CompetitionService();
+            var competitions = competitionService.getCompetitionCardDataByUser();
+            model.addAttribute("competitionData", competitions.get());
+        }
         return "home";
     }
 
@@ -31,10 +43,4 @@ public class HomeController {
         }
         return "redirect:/";
     }
-
-//    @GetMapping("/profile")
-//    @PreAuthorize("hasAuthority('SCOPE_profile')")
-//    ModelAndView userDetails(OAuth2AuthenticationToken authentication) {
-//        return new ModelAndView("profile", Collections.singletonMap("details", authentication.getPrincipal().getAttributes()));
-//    }
 }

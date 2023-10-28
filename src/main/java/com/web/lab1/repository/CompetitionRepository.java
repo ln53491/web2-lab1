@@ -1,9 +1,8 @@
 package com.web.lab1.repository;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.database.*;
-import com.web.lab1.data.Competition;
-import com.web.lab1.data.Schedule;
-import com.web.lab1.data.Score;
+import com.web.lab1.data.*;
 
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
@@ -22,8 +21,53 @@ public class CompetitionRepository {
         this.scoresTable = FirebaseDatabase.getInstance().getReference(this.scoresPathName);
     }
 
-    public void saveCompetition(Competition competition) {
-        this.competitionsTable.push().setValue(competition, (err, ref) -> {});
+    public String saveCompetition(Competition competition) {
+        DatabaseReference child = this.competitionsTable.push();
+        child.setValue(competition, (err, ref) -> {});
+        return child.getKey();
+    }
+
+    public void saveScores(String key, Map<String, String> scores) {
+        for (Map.Entry<String, String> entry : scores.entrySet()) {
+            this.scoresTable.child(key).child(entry.getKey()).setValueAsync(entry.getValue());
+        }
+    }
+
+    public void deleteCompetitionById(String competitionId) {
+        this.competitionsTable.child(competitionId).removeValueAsync();
+        this.scoresTable.child(competitionId).removeValueAsync();
+    }
+
+    public List<CompetitionCard> getCompetitionCardDataByUser(String username) {
+        final List<CompetitionCard> cards = new ArrayList<>();
+        final CountDownLatch latch = new CountDownLatch(1);
+        this.competitionsTable.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    String key = childSnapshot.getKey();
+                    String name = childSnapshot.child("name").getValue(String.class);
+                    String newUsername = childSnapshot.child("username").getValue(String.class);
+
+                    if (Objects.equals(newUsername, username)) {
+                        var compCard = new CompetitionCard(key, name);
+                        cards.add(compCard);
+                    }
+                }
+                latch.countDown();
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.err.println("Listener canceled: " + databaseError.getMessage());
+            }
+        });
+
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return cards;
     }
 
     public Optional<Schedule> getScheduleByCompetitorNumber(int numOfCompetitors) {

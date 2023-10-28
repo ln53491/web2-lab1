@@ -5,11 +5,14 @@ import com.web.lab1.data.Schedule;
 import com.web.lab1.service.CompetitionService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import java.util.Arrays;
+import java.util.Objects;
 
 @Controller
 @AllArgsConstructor
@@ -34,15 +37,27 @@ public class CompetitionController {
 
     @GetMapping("/competition/{id}")
     public String getCompetition(@PathVariable("id") String competitionId, Model model) {
-//        model.addAttribute("new_schedule", new Schedule());
         var competitionForm = this.competitionService.getCompetition(competitionId);
         if (competitionForm.isPresent()) {
             var form = competitionForm.get();
+            var authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication.getPrincipal() == "anonymousUser") {
+                model.addAttribute("allowed", false);
+            } else {
+                var userDetails = (DefaultOidcUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                String username = userDetails.getPreferredUsername();
+                if (Objects.equals(username, form.getUsername())) {
+                    model.addAttribute("allowed", true);
+                } else {
+                    model.addAttribute("allowed", false);
+                }
+            }
             var schedule = this.competitionService.getScheduleData(form.getCompetitors().length);
             var scores = this.competitionService.getScheduleScores(competitionId);
-            if (schedule.isPresent() && scores.isPresent()) {
+            var ranking = this.competitionService.getRankings(competitionId);
+            if (schedule.isPresent() && scores.isPresent() && ranking.isPresent()) {
                 model.addAttribute("scores", scores.get());
-                System.out.println(scores.get().getSchedules());
+                model.addAttribute("ranking", ranking.get());
                 model.addAttribute("scheduleNames", schedule.get());
                 model.addAttribute("competition", form);
                 model.addAttribute("competitionId", competitionId);
@@ -57,5 +72,12 @@ public class CompetitionController {
     public String setScores(@PathVariable("id") String competitionId, @ModelAttribute("schedule") Schedule schedule) {
         this.competitionService.updateSchedule(schedule, competitionId);
         return "redirect:/competition/" + competitionId;
+    }
+
+    @GetMapping("/competition/delete/{id}")
+    @PreAuthorize("hasAuthority('SCOPE_profile')")
+    public String deleteCompetition(@PathVariable("id") String competitionId) {
+        this.competitionService.deleteCompetition(competitionId);
+        return "redirect:/";
     }
 }
