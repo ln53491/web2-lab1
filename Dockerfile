@@ -1,12 +1,18 @@
-FROM ubuntu:latest AS build
+FROM openjdk:17-alpine AS builder
 
-FROM openjdk:17-jdk-slim
+COPY .mvn .mvn
+COPY mvnw .
+COPY pom.xml .
+COPY src src
+RUN chmod +x mvnw
 
-WORKDIR /app
+RUN ./mvnw clean package
 
-COPY ./target/lab1-1.jar /app
+FROM openjdk:17-alpine
+
+COPY --from=builder target/*.jar /app.jar
 
 EXPOSE 8080
 
+ENTRYPOINT ["java","-jar","/app.jar"]
 
-CMD ["java", "-jar", "lab1-1.jar"]
