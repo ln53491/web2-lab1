@@ -15,7 +15,7 @@ public class FirebaseConfiguration {
     @Value("${firebase.database.url}")
     private String databaseUrl;
 
-    private final String keyPath = System.getenv("FIREBASE_CONFIG");;
+    private final String keyPath = System.getenv("FIREBASE_CONFIG");
 
     @Bean
     public FirebaseApp initializeFirebaseApp() throws IOException {

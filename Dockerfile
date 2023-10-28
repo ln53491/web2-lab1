@@ -7,7 +7,7 @@ COPY src src
 RUN chmod +x mvnw
 
 COPY . /app
-ENV FIREBASE_CONFIG=/ect/firebase-key.json
+ENV FIREBASE_CONFIG=/etc/secrets/firebase-key.json
 
 
 RUN ./mvnw clean package
