@@ -8,4 +8,5 @@ COPY ./target/lab1-1.jar /app
 
 EXPOSE 8080
 
+
 CMD ["java", "-jar", "lab1-1.jar"]
